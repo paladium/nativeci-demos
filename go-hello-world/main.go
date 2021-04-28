@@ -1,5 +1,6 @@
 package main
 
 func main() {
-	print("Hello world10")
+	print("Hello world1")
+	print(1 + 2)
 }
