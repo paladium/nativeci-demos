@@ -1,7 +1,7 @@
 package main
 
 func main() {
-	const n = 39
+	const n = 40
 	d := [n + 1]int{}
 	d[0] = 1
 	d[1] = 1
