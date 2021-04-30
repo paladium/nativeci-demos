@@ -13,5 +13,10 @@ func main() {
 			"status": "ok",
 		})
 	})
+	r.GET("/api/products", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"products": []string{"Computer", "Iphone"},
+		})
+	})
 	r.Run("0.0.0.0:8000")
 }
