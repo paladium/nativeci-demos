@@ -1,12 +1,17 @@
 package main
 
 import (
-	"fmt"
-	"math"
+	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	fmt.Println("Hello timka")
-	fmt.Println(math.Min(5.0, -6.0))
-	fmt.Println("Wow nice")
+	r := gin.Default()
+	r.GET("/api", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"status": "ok"
+		})
+	})
+	r.Run("0.0.0.0:8000")
 }
