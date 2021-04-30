@@ -8,4 +8,5 @@ import (
 func main() {
 	fmt.Println("Hello timka")
 	fmt.Println(math.Min(5.0, -6.0))
+	fmt.Println("Wow nice")
 }
