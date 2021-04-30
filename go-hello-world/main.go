@@ -38,6 +38,10 @@ func main() {
 					Name:  "Bootcamp for 24 weeks",
 					Price: 300,
 				},
+				{
+					Name:  "Bootcamp for 1 year",
+					Price: 20202,
+				},
 			},
 		})
 	})
