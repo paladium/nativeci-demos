@@ -43,8 +43,8 @@ func main() {
 					Price: 20203,
 				},
 				{
-					Name:  "University 3 years",
-					Price: 373234
+					Name:  "University 4 years",
+					Price: 373234,
 				},
 			},
 		})
