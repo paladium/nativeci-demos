@@ -49,5 +49,15 @@ func main() {
 			},
 		})
 	})
+	r.GET("/api/locations", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"locations": []string{
+				"UK",
+				"USA",
+				"Azerbaijan",
+				"Russia",
+			},
+		})
+	})
 	r.Run("0.0.0.0:8000")
 }
