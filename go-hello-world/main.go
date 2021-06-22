@@ -58,6 +58,7 @@ func main() {
 				"Russia",
 				"Canada",
 				"New",
+				"New Zealand"
 			},
 		})
 	})
