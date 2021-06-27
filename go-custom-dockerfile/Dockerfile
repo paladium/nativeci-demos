@@ -1,4 +1,4 @@
-FROM golang:1.14 as builder
+FROM golang:1.14-buster as builder
 
 # Add Maintainer Info
 LABEL maintainer="Ilkin Musayev"
@@ -15,12 +15,11 @@ RUN go mod download
 # Copy the source from the current directory to the Working Directory inside the container
 COPY . .
 
-RUN go build -o main main.go
+RUN CGO_ENABLED=1 GOOS=linux go build -o main -a -ldflags '-linkmode external -extldflags "-static"' .
 
 # Second stage
 FROM alpine:latest
-
 WORKDIR /app
 COPY --from=builder /app/main .
 COPY --from=builder /app/products.db .
-ENTRYPOINT [ "./main" ]
+ENTRYPOINT [ "/app/main" ]
