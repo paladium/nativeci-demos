@@ -15,7 +15,7 @@ RUN go mod download
 # Copy the source from the current directory to the Working Directory inside the container
 COPY . .
 
-RUN CGO_ENABLED=0 go build o main .
+RUN CGO_ENABLED=0 go build -o main main.go
 
 # Second stage
 FROM alpine:latest
