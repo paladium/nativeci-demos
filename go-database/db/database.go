@@ -37,7 +37,7 @@ func (db *DatabaseRepository) getDatabaseConnectionConfig(connectionURL string) 
 		Passwd:               password,
 		Net:                  "tcp",
 		Addr:                 u.Host,
-		DBName:               u.Path[1:],
+		DBName:               "twitter",
 		AllowNativePasswords: true,
 	}
 	connection := config.FormatDSN()
