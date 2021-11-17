@@ -6,6 +6,7 @@ import (
 	"go-database/models"
 	"log"
 	"net/url"
+	"time"
 
 	"github.com/go-sql-driver/mysql"
 	_ "github.com/go-sql-driver/mysql"
@@ -97,4 +98,33 @@ func (db *DatabaseRepository) FindOrRegisterUser(username string, password strin
 		userID = &existingUser.ID
 	}
 	return
+}
+
+func (db *DatabaseRepository) GetAllTweets() ([]models.ResponseTweet, error) {
+	rows, err := db.client.Query("SELECT t.id, tweet, user_id, posted_at, u.username FROM tweets t INNER JOIN users u ON t.user_id = u.id order by posted_at desc")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	results := []models.ResponseTweet{}
+	for rows.Next() {
+		var result models.ResponseTweet
+		err := rows.Scan(&result.ID, &result.Tweet.Tweet, &result.UserID, &result.PostedAt, &result.Username)
+		if err != nil {
+			return nil, err
+		}
+		results = append(results, result)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return results, nil
+}
+
+func (db *DatabaseRepository) PostTweet(userID string, tweet string) error {
+	_, err := db.client.Exec("INSERT INTO tweets(tweet, user_id, posted_at) VALUES(?, ?, ?)", tweet, userID, time.Now().Format("2006-01-02 03:04:05"))
+	if err != nil {
+		return err
+	}
+	return nil
 }

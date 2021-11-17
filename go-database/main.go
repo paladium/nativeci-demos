@@ -68,7 +68,15 @@ func main() {
 	r.GET("/chat", func(c *gin.Context) {
 		_, err := tryDecodeToken(c)
 		if err == nil {
-			c.HTML(http.StatusOK, "chat.html", nil)
+			tweets, err := dbRepository.GetAllTweets()
+			if err != nil {
+				log.Println(err.Error())
+				c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"error": "Cannot get the tweets"})
+				return
+			}
+			c.HTML(http.StatusOK, "chat.html", gin.H{
+				"tweets": tweets,
+			})
 		} else {
 			c.Redirect(301, "/")
 		}
@@ -96,6 +104,21 @@ func main() {
 		}
 		c.SetCookie("token", *token, 1000, "/", ".", false, false)
 		c.Redirect(301, "/chat")
+	})
+	r.POST("/tweet", func(c *gin.Context) {
+		userID, err := tryDecodeToken(c)
+		if err == nil {
+			tweet := c.PostForm("tweet")
+			err := dbRepository.PostTweet(*userID, tweet)
+			if err != nil {
+				log.Println(err.Error())
+				c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"error": "Cannot post the tweet"})
+				return
+			}
+			c.Redirect(301, "/chat")
+		} else {
+			c.HTML(http.StatusOK, "index.html", nil)
+		}
 	})
 	r.Run("0.0.0.0:8000")
 }
