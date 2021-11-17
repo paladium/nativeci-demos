@@ -68,7 +68,9 @@ func (db *DatabaseRepository) FindOrRegisterUser(username string, password strin
 	//If the hashed passwords match return no error
 	//Return error otherwise
 	//If the user does not exist, register him and return no error
+	log.Println("Executing db query")
 	row := db.client.QueryRow("SELECT id,username,password FROM users WHERE username=?", username)
+	log.Println("Executed db query")
 	var existingUser models.User
 	err = row.Scan(&existingUser.ID, &existingUser.Username, &existingUser.Password)
 	if err != nil {
