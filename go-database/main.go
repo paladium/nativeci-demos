@@ -95,6 +95,7 @@ func main() {
 			c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"error": "Invalid username or password"})
 			return
 		}
+		fmt.Printf("New user_id %d\n", *userID)
 		//Create a jwt cookie and set is response
 		token, err := createJwtToken(strconv.Itoa(int(*userID)))
 		if err != nil {
@@ -102,6 +103,7 @@ func main() {
 			c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"error": "Invalid username or password"})
 			return
 		}
+		fmt.Println("Generated jwt token")
 		c.SetCookie("token", *token, 1000, "/", ".", false, false)
 		c.Redirect(301, "/chat")
 	})
