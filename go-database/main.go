@@ -85,9 +85,10 @@ func main() {
 		username := c.PostForm("username")
 		password := c.PostForm("password")
 		if username == "" || password == "" {
-			c.Redirect(301, "")
+			c.Redirect(301, "/")
 			return
 		}
+		log.Println("Getting user from database")
 		//Try to find the user in database or register him
 		userID, err := dbRepository.FindOrRegisterUser(username, password)
 		if err != nil {
@@ -95,6 +96,7 @@ func main() {
 			c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"error": "Invalid username or password"})
 			return
 		}
+		log.Println("Generating jwt token")
 		//Create a jwt cookie and set is response
 		token, err := createJwtToken(strconv.Itoa(int(*userID)))
 		if err != nil {
@@ -103,6 +105,7 @@ func main() {
 			return
 		}
 		c.SetCookie("token", *token, 1000, "/", "", false, false)
+		log.Println("Redirecting to chat")
 		c.Redirect(301, "/chat")
 	})
 	r.POST("/tweet", func(c *gin.Context) {
