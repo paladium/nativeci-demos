@@ -74,10 +74,7 @@ func (db *DatabaseRepository) FindOrRegisterUser(username string, password strin
 	if err != nil {
 		//Insert the user
 		var hashedPassword string
-		hashedPassword, err = HashPassword(password)
-		if err != nil {
-			return
-		}
+		hashedPassword = HashPassword(password)
 		var result sql.Result
 		result, err = db.client.Exec("INSERT INTO users(username, password) VALUES(?, ?)", username, hashedPassword)
 		if err != nil {
