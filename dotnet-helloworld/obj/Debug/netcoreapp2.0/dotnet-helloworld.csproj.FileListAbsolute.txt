@@ -1,0 +1,10 @@
+D:\nativeci-demos\dotnet-helloworld\bin\Debug\netcoreapp2.0\dotnet-helloworld.deps.json
+D:\nativeci-demos\dotnet-helloworld\bin\Debug\netcoreapp2.0\dotnet-helloworld.runtimeconfig.json
+D:\nativeci-demos\dotnet-helloworld\bin\Debug\netcoreapp2.0\dotnet-helloworld.runtimeconfig.dev.json
+D:\nativeci-demos\dotnet-helloworld\bin\Debug\netcoreapp2.0\dotnet-helloworld.dll
+D:\nativeci-demos\dotnet-helloworld\bin\Debug\netcoreapp2.0\dotnet-helloworld.pdb
+D:\nativeci-demos\dotnet-helloworld\obj\Debug\netcoreapp2.0\dotnet-helloworld.csproj.CoreCompileInputs.cache
+D:\nativeci-demos\dotnet-helloworld\obj\Debug\netcoreapp2.0\dotnet-helloworld.AssemblyInfoInputs.cache
+D:\nativeci-demos\dotnet-helloworld\obj\Debug\netcoreapp2.0\dotnet-helloworld.AssemblyInfo.cs
+D:\nativeci-demos\dotnet-helloworld\obj\Debug\netcoreapp2.0\dotnet-helloworld.dll
+D:\nativeci-demos\dotnet-helloworld\obj\Debug\netcoreapp2.0\dotnet-helloworld.pdb
